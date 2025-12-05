@@ -2,10 +2,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useStore from '../store';
+import { translations } from '../i18n/translations';
 
 const RegistrationPage = () => {
-  const { formData, setFormData, completeRegistration } = useStore();
+  const { formData, setFormData, completeRegistration, language } = useStore();
   const navigate = useNavigate();
+  const t = translations[language];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,21 +21,21 @@ const RegistrationPage = () => {
       <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold text-blue-900 mb-2">
-            "Hayot yo'li education" - Ro'yxatdan o'tish
+            {t.registrationTitle}
           </h1>
           <p className="text-gray-700 italic">
-            — bu Rossiya Federatsiyasining davlat universitetlarida bepul ta'lim olish yo'li!
+            {t.registrationSubtitle}
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-8">
-          {/* F.I.O Section */}
+          {/* Personal Information Section */}
           <div className="space-y-6">
-            <h2 className="text-xl font-bold text-gray-800">Shaxsiy ma'lumotlar</h2>
-            
+            <h2 className="text-xl font-bold text-gray-800">{t.personalInfoTitle}</h2>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block font-medium text-gray-700 mb-2">Ismingiz *</label>
+                <label className="block font-medium text-gray-700 mb-2">{t.firstName} {t.required}</label>
                 <input
                   type="text"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -42,9 +44,9 @@ const RegistrationPage = () => {
                   required
                 />
               </div>
-              
+
               <div>
-                <label className="block font-medium text-gray-700 mb-2">Familiyangiz *</label>
+                <label className="block font-medium text-gray-700 mb-2">{t.lastName} {t.required}</label>
                 <input
                   type="text"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -53,20 +55,20 @@ const RegistrationPage = () => {
                   required
                 />
               </div>
-              
+
               <div>
-                <label className="block font-medium text-gray-700 mb-2">Telefon raqamingiz</label>
+                <label className="block font-medium text-gray-700 mb-2">{t.phone}</label>
                 <input
                   type="tel"
-                  placeholder="+998 90 123-45-67"
+                  placeholder={t.phonePlaceholder}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   value={formData.phone}
                   onChange={(e) => setFormData('phone', e.target.value)}
                 />
               </div>
-              
+
               <div>
-                <label className="block font-medium text-gray-700 mb-2">Viloyatingiz *</label>
+                <label className="block font-medium text-gray-700 mb-2">{t.region} {t.required}</label>
                 <input
                   type="text"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -75,9 +77,9 @@ const RegistrationPage = () => {
                   required
                 />
               </div>
-              
+
               <div>
-                <label className="block font-medium text-gray-700 mb-2">Tumaningiz</label>
+                <label className="block font-medium text-gray-700 mb-2">{t.district}</label>
                 <input
                   type="text"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -85,9 +87,9 @@ const RegistrationPage = () => {
                   onChange={(e) => setFormData('district', e.target.value)}
                 />
               </div>
-              
+
               <div>
-                <label className="block font-medium text-gray-700 mb-2">Maktab/Litsey/Kollej raqami *</label>
+                <label className="block font-medium text-gray-700 mb-2">{t.schoolNumber} {t.required}</label>
                 <input
                   type="text"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -99,22 +101,64 @@ const RegistrationPage = () => {
             </div>
           </div>
 
+          {/* Parent Information Section */}
+          <div className="space-y-6">
+            <h2 className="text-xl font-bold text-gray-800">{t.parentInfoTitle}</h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block font-medium text-gray-700 mb-2">{t.fatherName}</label>
+                <input
+                  type="text"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  value={formData.father_name}
+                  onChange={(e) => setFormData('father_name', e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="block font-medium text-gray-700 mb-2">{t.fatherPhone}</label>
+                <input
+                  type="tel"
+                  placeholder={t.phonePlaceholder}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  value={formData.father_phone}
+                  onChange={(e) => setFormData('father_phone', e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="block font-medium text-gray-700 mb-2">{t.motherName}</label>
+                <input
+                  type="text"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  value={formData.mother_name}
+                  onChange={(e) => setFormData('mother_name', e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="block font-medium text-gray-700 mb-2">{t.motherPhone}</label>
+                <input
+                  type="tel"
+                  placeholder={t.phonePlaceholder}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  value={formData.mother_phone}
+                  onChange={(e) => setFormData('mother_phone', e.target.value)}
+                />
+              </div>
+            </div>
+          </div>
+
           {/* Questions Section */}
           <div className="space-y-6">
-            <h2 className="text-xl font-bold text-gray-800">So'rovnoma savollari</h2>
-            <p className="text-gray-600 italic">Har bir savolga to'liq javob bering *</p>
-            
+            <h2 className="text-xl font-bold text-gray-800">{t.surveyTitle}</h2>
+            <p className="text-gray-600 italic">{t.surveySubtitle} {t.required}</p>
+
             {[1, 2, 3, 4, 5, 6].map((num) => (
               <div key={num} className="space-y-2">
                 <label className="block font-medium text-gray-700">
-                  {num}. {
-                    num === 1 ? "Hozirda qayerda o'qiysiz? (Maktab, litsey, kollej, universitet)" :
-                    num === 2 ? "Rus tili yoki boshqa fanlardan sertifikatingiz bormi? (Sertifikat turi va darajasi)" :
-                    num === 3 ? "Qaysi yo'nalishda o'qimoqchisiz? (Tibbiyot, IT, Iqtisodiyot, Pedagogika va h.k)" :
-                    num === 4 ? "Kelajakda kim bo'lmoqchisiz?" :
-                    num === 5 ? "Chet elda o'qishga tayyormisiz?" :
-                    "Rus tilida o'qishga tayyormisiz?"
-                  } *
+                  {num}. {t[`question${num}`]} {t.required}
                 </label>
                 <input
                   type="text"
@@ -129,28 +173,28 @@ const RegistrationPage = () => {
 
           {/* Language Proficiency */}
           <div className="space-y-6">
-            <h2 className="text-xl font-bold text-gray-800">Tillarni bilish darajangizni belgilang</h2>
-            
+            <h2 className="text-xl font-bold text-gray-800">{t.languageProficiency}</h2>
+
             <div className="space-y-4">
-              {['english_level', 'russian_level'].map((language) => (
-                <div key={language} className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 bg-gray-50 rounded-lg">
+              {['english_level', 'russian_level'].map((languageLevel) => (
+                <div key={languageLevel} className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 bg-gray-50 rounded-lg">
                   <span className="font-medium text-gray-700">
-                    {language === 'english_level' ? 'Ingliz tili' : 'Rus tili'}
+                    {languageLevel === 'english_level' ? t.englishLevel : t.russianLevel}
                   </span>
                   <div className="flex flex-col sm:flex-row gap-4">
                     {['none', 'medium', 'good'].map((level) => (
                       <label key={level} className="flex items-center gap-2 cursor-pointer">
                         <input
                           type="radio"
-                          name={language}
+                          name={languageLevel}
                           value={level}
-                          checked={formData[language] === level}
-                          onChange={(e) => setFormData(language, e.target.value)}
+                          checked={formData[languageLevel] === level}
+                          onChange={(e) => setFormData(languageLevel, e.target.value)}
                           className="w-5 h-5 text-blue-600"
                         />
                         <span className="text-gray-700">
-                          {level === 'none' ? "Bilmayman" : 
-                           level === 'medium' ? "O'rtacha bilaman" : "Yaxshi bilaman"}
+                          {level === 'none' ? t.levelNone :
+                            level === 'medium' ? t.levelMedium : t.levelGood}
                         </span>
                       </label>
                     ))}
@@ -165,10 +209,10 @@ const RegistrationPage = () => {
               type="submit"
               className="w-full md:w-auto px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium text-lg shadow-md hover:shadow-lg transition-all"
             >
-              Fanlarni tanlashga o'tish →
+              {t.nextToSubjects}
             </button>
             <p className="text-gray-600 text-sm mt-4">
-              * Barcha maydonlarni to'ldirgach, fanlarni tanlash sahifasiga o'tasiz
+              {t.required} {t.requiredNote}
             </p>
           </div>
         </form>

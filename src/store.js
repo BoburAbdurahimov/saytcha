@@ -3,6 +3,9 @@ import { create } from 'zustand';
 import { questionsDB } from './data/questions';
 
 const useStore = create((set, get) => ({
+  // Language selection
+  language: 'uz', // Default language is Uzbek
+
   // Form data
   formData: {
     first_name: '',
@@ -11,6 +14,10 @@ const useStore = create((set, get) => ({
     region: '',
     district: '',
     school_number: '',
+    father_name: '',
+    father_phone: '',
+    mother_name: '',
+    mother_phone: '',
     q1: '',
     q2: '',
     q3: '',
@@ -155,6 +162,9 @@ const useStore = create((set, get) => ({
 
     return true;
   },
+
+  // Set language
+  setLanguage: (lang) => set({ language: lang }),
 }));
 
 export default useStore;

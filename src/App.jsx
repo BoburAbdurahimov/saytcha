@@ -13,11 +13,13 @@ import SubjectSelectionPage from "./pages/SubjectSelectionPage";
 import TestPage from "./pages/TestPage";
 import AdminPage from "./pages/AdminPage";
 import useStore from "./store";
+import { translations } from "./i18n/translations";
 
 // Header component
 const Header = () => {
-  const { selectedSubjects, formData } = useStore();
+  const { selectedSubjects, formData, language, setLanguage } = useStore();
   const navigate = useNavigate();
+  const t = translations[language];
 
   return (
     <header className="bg-blue-50 shadow-sm">
@@ -28,17 +30,39 @@ const Header = () => {
               <span className="font-bold text-xl">H</span>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-blue-900">"Hayot yo'li education"</h1>
-              <p className="text-sm text-gray-600">Rossiya davlat universitetlarida bepul ta'lim</p>
+              <h1 className="text-xl font-bold text-blue-900">{t.appName}</h1>
+              <p className="text-sm text-gray-600">{t.appDescription}</p>
             </div>
           </Link>
 
           <nav className="flex gap-4 items-center">
+            {/* Language Switcher */}
+            <div className="flex gap-1 bg-white rounded-lg p-1 border border-gray-200">
+              <button
+                onClick={() => setLanguage('uz')}
+                className={`px-3 py-1 rounded text-sm font-medium transition-all ${language === 'uz'
+                  ? 'bg-blue-600 text-white'
+                  : 'text-gray-600 hover:bg-gray-100'
+                  }`}
+              >
+                UZ
+              </button>
+              <button
+                onClick={() => setLanguage('ru')}
+                className={`px-3 py-1 rounded text-sm font-medium transition-all ${language === 'ru'
+                  ? 'bg-blue-600 text-white'
+                  : 'text-gray-600 hover:bg-gray-100'
+                  }`}
+              >
+                RU
+              </button>
+            </div>
+
             <Link
               to="/"
               className="px-4 py-2 rounded-lg hover:bg-blue-100 font-medium text-blue-700 no-underline"
             >
-              Ro'yxatdan o'tish
+              {t.navRegistration}
             </Link>
 
             {formData.first_name && (
@@ -46,7 +70,7 @@ const Header = () => {
                 to="/subjects"
                 className="px-4 py-2 rounded-lg hover:bg-blue-100 font-medium text-blue-700 no-underline"
               >
-                Fanlarni tanlash
+                {t.navSubjects}
                 {selectedSubjects.length > 1 && (
                   <span className="ml-2 bg-blue-600 text-white text-xs px-2 py-1 rounded-full">
                     {selectedSubjects.length}/3
@@ -60,7 +84,7 @@ const Header = () => {
                 to="/test"
                 className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium no-underline"
               >
-                Testni boshlash
+                {t.navStartTest}
               </Link>
             )}
 
@@ -103,6 +127,9 @@ const ProtectedRoute = ({ children, condition }) => {
 
 // Main App component
 const AppContent = () => {
+  const { language } = useStore();
+  const t = translations[language];
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
@@ -138,10 +165,9 @@ const AppContent = () => {
       <footer className="bg-white border-t mt-12">
         <div className="container mx-auto px-4 py-6">
           <div className="text-center text-gray-600">
-            <p>© 2024 "Hayot yo'li education" - Barcha huquqlar himoyalangan</p>
+            <p>{t.footerCopyright}</p>
             <p className="text-sm mt-2">
-              Rossiya Federatsiyasining davlat universitetlarida bepul ta'lim
-              olish imkoniyati
+              {t.footerDescription}
             </p>
           </div>
         </div>

@@ -74,6 +74,12 @@ export function formatQuizData(formData, selectedSubjects, testSession) {
         district: formData.district,
         school_number: formData.school_number,
 
+        // Parent information
+        father_name: formData.father_name,
+        father_phone: formData.father_phone,
+        mother_name: formData.mother_name,
+        mother_phone: formData.mother_phone,
+
         // Registration questions
         q1: formData.q1,
         q2: formData.q2,
@@ -87,13 +93,16 @@ export function formatQuizData(formData, selectedSubjects, testSession) {
         russian_level: formData.russian_level,
 
         // Quiz data
-        selectedSubjects: selectedSubjects,
-        testAnswers: testSession.answers,
+        selectedSubjects: selectedSubjects.join(', '),
+        testAnswers: JSON.stringify(testSession.answers),
         testCompleted: testSession.completed,
 
         // Score data
         score: scoreData.score,
         totalQuestions: scoreData.total,
         scorePercentage: scoreData.percentage,
+
+        // Timestamp
+        timestamp: new Date().toISOString(),
     };
 }
