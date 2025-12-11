@@ -130,10 +130,38 @@ const TestPage = () => {
                   <h2 className="text-2xl font-bold">Maxsus Kod</h2>
                 </div>
                 <p className="text-white/90 mb-4">Telegram botda natijalaringizni tekshirish uchun bu kodni kiriting</p>
-                <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6 border-2 border-white/30">
+
+                <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6 border-2 border-white/30 mb-6">
                   <p className="text-4xl font-mono font-bold tracking-wider">{specialCode}</p>
                 </div>
-                <p className="text-sm text-white/80 mt-4">⚠️ Ushbu kodni saqlab qo'ying!</p>
+
+                <div className="flex flex-col items-center gap-4">
+                  <a
+                    href={`https://t.me/hayotyuliquizzresultsbot?start=${specialCode}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-8 py-4 bg-white text-purple-700 rounded-full font-bold hover:bg-gray-50 transition-all transform hover:scale-105 shadow-lg group"
+                  >
+                    <svg className="w-6 h-6 text-blue-500 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.568 8.084l-2.094 10.088c-.156.711-.571.886-1.157.551l-3.203-2.39-1.543 1.503c-.171.171-.314.316-.642.316l.229-3.264 5.94-5.45c.258-.229-.057-.356-.399-.128L7.337 14.12l-3.165-.992c-.687-.215-.702-.687.143-1.015l12.376-4.832c.571-.215 1.071.129.878 1.803z" />
+                    </svg>
+                    Natijani tekshirish
+                  </a>
+
+                  <div className="bg-white/10 rounded-lg p-4 text-left w-full max-w-md mx-auto backdrop-blur-sm border border-white/20">
+                    <h3 className="font-semibold mb-3 flex items-center gap-2 border-b border-white/20 pb-2">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                      Tekshirish bo'yicha yo'riqnoma:
+                    </h3>
+                    <ol className="list-decimal list-inside space-y-2 text-sm opacity-90">
+                      <li>"Natijani tekshirish" tugmasini bosing</li>
+                      <li>Telegram bot ochiladi, <strong>Start</strong> tugmasini bosing</li>
+                      <li>Agar natija avtomatik chiqmasa, yuqoridagi <strong>{specialCode.toString()}</strong> kodni botga yuboring</li>
+                    </ol>
+                  </div>
+                </div>
+
+                <p className="text-sm text-white/80 mt-6 font-medium">⚠️ Ushbu kodni saqlab qo'yishni unutmang!</p>
               </div>
             </div>
           )}
