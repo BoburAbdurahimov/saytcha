@@ -69,16 +69,16 @@ export function formatQuizData(formData, selectedSubjects, testSession) {
         // Personal information
         first_name: formData.first_name,
         last_name: formData.last_name,
-        phone: formData.phone,
+        phone: formData.phone ? formData.phone.replace(/^\+/, '') : formData.phone,
         region: formData.region,
         district: formData.district,
         school_number: formData.school_number,
 
         // Parent information
         father_name: formData.father_name,
-        father_phone: formData.father_phone,
+        father_phone: formData.father_phone ? formData.father_phone.replace(/^\+/, '') : formData.father_phone,
         mother_name: formData.mother_name,
-        mother_phone: formData.mother_phone,
+        mother_phone: formData.mother_phone ? formData.mother_phone.replace(/^\+/, '') : formData.mother_phone,
 
         // Registration questions
         q1: formData.q1,
