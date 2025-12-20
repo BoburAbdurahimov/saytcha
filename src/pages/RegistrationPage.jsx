@@ -88,17 +88,17 @@ const RegistrationPage = () => {
         error = validateName(value);
         break;
       case 'phone':
-        error = validatePhone(value, false); // Phone is optional
+        error = validatePhone(value, true);
         break;
       case 'father_phone':
       case 'mother_phone':
-        error = validatePhone(value, false); // Parent phones are optional
+        error = validatePhone(value, true);
         break;
       case 'region':
         error = validateRegion(value);
         break;
       case 'district':
-        // District is optional
+        error = validateRegion(value);
         break;
       case 'school_number':
         error = validateSchoolNumber(value);
@@ -162,7 +162,8 @@ const RegistrationPage = () => {
   const validateAllFields = () => {
     const newErrors = {};
     const requiredFields = [
-      'first_name', 'last_name', 'region', 'school_number',
+      'first_name', 'last_name', 'phone', 'region', 'district', 'school_number',
+      'father_name', 'father_phone', 'mother_name', 'mother_phone',
       'q1', 'q2', 'q3', 'q4', 'q5', 'q6'
     ];
 
@@ -254,7 +255,9 @@ const RegistrationPage = () => {
               </div>
 
               <div>
-                <label className="block font-medium text-gray-700 mb-2">{t.phone}</label>
+                <label className="block font-medium text-gray-700 mb-2">
+                  {t.phone} <span className="text-red-500">{t.required}</span>
+                </label>
                 <input
                   type="tel"
                   placeholder={t.phonePlaceholder}
@@ -288,14 +291,21 @@ const RegistrationPage = () => {
               </div>
 
               <div>
-                <label className="block font-medium text-gray-700 mb-2">{t.district}</label>
+                <label className="block font-medium text-gray-700 mb-2">
+                  {t.district} <span className="text-red-500">{t.required}</span>
+                </label>
                 <input
                   type="text"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition ${getError('district') ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                    }`}
                   value={formData.district}
                   onChange={(e) => handleChange('district', e.target.value)}
+                  onBlur={() => handleBlur('district')}
                   placeholder={language === 'uz' ? 'Tumaningizni kiriting' : 'Введите ваш район'}
                 />
+                {getError('district') && (
+                  <p className="mt-1 text-sm text-red-600">{getError('district')}</p>
+                )}
               </div>
 
               <div>
@@ -324,7 +334,9 @@ const RegistrationPage = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block font-medium text-gray-700 mb-2">{t.fatherName}</label>
+                <label className="block font-medium text-gray-700 mb-2">
+                  {t.fatherName} <span className="text-red-500">{t.required}</span>
+                </label>
                 <input
                   type="text"
                   className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition ${getError('father_name') ? 'border-red-300 bg-red-50' : 'border-gray-300'
@@ -340,7 +352,9 @@ const RegistrationPage = () => {
               </div>
 
               <div>
-                <label className="block font-medium text-gray-700 mb-2">{t.fatherPhone}</label>
+                <label className="block font-medium text-gray-700 mb-2">
+                  {t.fatherPhone} <span className="text-red-500">{t.required}</span>
+                </label>
                 <input
                   type="tel"
                   placeholder={t.phonePlaceholder}
@@ -356,7 +370,9 @@ const RegistrationPage = () => {
               </div>
 
               <div>
-                <label className="block font-medium text-gray-700 mb-2">{t.motherName}</label>
+                <label className="block font-medium text-gray-700 mb-2">
+                  {t.motherName} <span className="text-red-500">{t.required}</span>
+                </label>
                 <input
                   type="text"
                   className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition ${getError('mother_name') ? 'border-red-300 bg-red-50' : 'border-gray-300'
@@ -372,7 +388,9 @@ const RegistrationPage = () => {
               </div>
 
               <div>
-                <label className="block font-medium text-gray-700 mb-2">{t.motherPhone}</label>
+                <label className="block font-medium text-gray-700 mb-2">
+                  {t.motherPhone} <span className="text-red-500">{t.required}</span>
+                </label>
                 <input
                   type="tel"
                   placeholder={t.phonePlaceholder}
